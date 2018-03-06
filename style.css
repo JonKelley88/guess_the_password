@@ -11,7 +11,7 @@ body {
 #start-screen,
 #game-screen {
   text-align: center;
-  overflow: hidden;  
+  overflow: hidden;
 }
 
 #game-screen.show {
@@ -28,6 +28,11 @@ body {
   max-height: 0;
   overflow: hidden;
   transition-duration: 1s;
+}
+
+.anim-text {
+  background-color: #00FF00;
+  color: black;
 }
 
 #start {
@@ -67,4 +72,9 @@ body {
   color: yellow;
   font-size: 1.5em;
   cursor: pointer;
+}
+
+#winner, #loser {
+  width: 400px;
+  margin: 0 auto;
 }

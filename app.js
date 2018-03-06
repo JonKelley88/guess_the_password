@@ -53,6 +53,26 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("guesses-remaining").innerText = `Guesses remaining: ${guessCount}.`;
   }
 
+  function gameOverAnim (result) {
+    let gameOverText = document.getElementById(result);
+    let counter = 0;
+    gameOverText.style.transitionDuration = "0s";
+
+    let timer = setInterval(function(){
+
+      if (counter >= 7){
+        clearInterval(timer);
+      } else if (counter % 2 === 0){
+        gameOverText.classList.remove("anim-text");
+        counter++;
+      } else {
+        gameOverText.classList.add("anim-text");
+        counter++;
+      }
+
+    }, 200);
+  }
+
   function updateGame(e) {
     if (e.target.tagName === "LI" && !e.target.classList.contains("disabled")) {
       // grab guessed word, check it against password, update view
@@ -66,9 +86,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (similarityScore === password.length) {
         toggleClasses(document.getElementById("winner"), 'hide', 'show');
         this.removeEventListener('click', updateGame);
+        document.getElementById("word-list").style.pointerEvents = "none";
+        gameOverAnim("winner");
       } else if (guessCount === 0) {
         toggleClasses(document.getElementById("loser"), 'hide', 'show');
         this.removeEventListener('click', updateGame);
+        document.getElementById("word-list").style.pointerEvents = "none";
+        gameOverAnim("loser");
       }
     }
   }
